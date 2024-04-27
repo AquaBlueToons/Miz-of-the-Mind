@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvtex3jwr86s3"]
+
+[ext_resource type="Texture2D" uid="uid://fjkano54ca83" path="res://ART/BG_01/Nothing.png" id="1_g1xcb"]
+[ext_resource type="Texture2D" uid="uid://ba1txosc3s27q" path="res://ART/Charater/MizDie.png" id="2_brbdi"]
+[ext_resource type="Script" path="res://Label5.gd" id="3_fo6if"]
+[ext_resource type="AudioStream" uid="uid://87c34nvrr8ya" path="res://ART/Music/End.wav" id="3_vf50n"]
+
+[sub_resource type="SystemFont" id="SystemFont_e2o36"]
+font_names = PackedStringArray("Yu Gothic")
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("3_fo6if")
+
+[node name="Nothing" type="Sprite2D" parent="."]
+position = Vector2(658, 378)
+texture = ExtResource("1_g1xcb")
+
+[node name="MizDie" type="Sprite2D" parent="."]
+position = Vector2(574, 326)
+scale = Vector2(0.0976806, 0.0976806)
+texture = ExtResource("2_brbdi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 322.0
+offset_top = 102.0
+offset_right = 867.0
+offset_bottom = 216.0
+theme_override_fonts/font = SubResource("SystemFont_e2o36")
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 322.0
+offset_top = 443.0
+offset_right = 867.0
+offset_bottom = 557.0
+theme_override_fonts/font = SubResource("SystemFont_e2o36")
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="Label5" type="Label" parent="CanvasLayer"]
+offset_left = 859.0
+offset_top = 569.0
+offset_right = 1078.0
+offset_bottom = 673.0
+text = "Press A or space to continue"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vf50n")
+autoplay = true
