@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://y04thgvic8pj"]
+
+[ext_resource type="Script" path="res://Souls.gd" id="1_2khuw"]
+[ext_resource type="Texture2D" uid="uid://yehxvgnbt5pk" path="res://ART/Pressure/PR_G.png" id="1_4qq4s"]
+[ext_resource type="Texture2D" uid="uid://dh6swe548h2f1" path="res://ART/Pressure/PR_B_01.png" id="2_tx3hp"]
+[ext_resource type="Texture2D" uid="uid://cwb1t4tory3s8" path="res://ART/Pressure/PR_B_02.png" id="3_ul274"]
+[ext_resource type="Texture2D" uid="uid://kupjde0fkeh7" path="res://ART/Pressure/PR_B_03.png" id="4_17ggs"]
+[ext_resource type="Texture2D" uid="uid://dwf3ylsehsmaj" path="res://ART/Pressure/PR_B_04.png" id="5_gqwjw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gcwug"]
+radius = 127.142
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dodt5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4qq4s")
+}],
+"loop": true,
+"name": &"Good",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tx3hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ul274")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_17ggs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gqwjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_17ggs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ul274")
+}],
+"loop": true,
+"name": &"Stressed",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukldk"]
+size = Vector2(212, 224.5)
+
+[node name="Souls" type="CharacterBody2D"]
+script = ExtResource("1_2khuw")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, -1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gcwug")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_dodt5")
+animation = &"Good"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_ukldk")
+
+[node name="Streedout" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Streedout" to="." method="_on_streedout_timeout"]

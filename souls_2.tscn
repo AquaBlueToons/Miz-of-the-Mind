@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://du3vbdcdsn44"]
+
+[ext_resource type="Script" path="res://Souls 2.gd" id="1_1f58x"]
+[ext_resource type="Texture2D" uid="uid://yehxvgnbt5pk" path="res://ART/Pressure/PR_G.png" id="2_mq0hg"]
+[ext_resource type="Texture2D" uid="uid://dh6swe548h2f1" path="res://ART/Pressure/PR_B_01.png" id="3_dp61i"]
+[ext_resource type="Texture2D" uid="uid://cwb1t4tory3s8" path="res://ART/Pressure/PR_B_02.png" id="4_6mhl0"]
+[ext_resource type="Texture2D" uid="uid://kupjde0fkeh7" path="res://ART/Pressure/PR_B_03.png" id="5_45ixv"]
+[ext_resource type="Texture2D" uid="uid://dwf3ylsehsmaj" path="res://ART/Pressure/PR_B_04.png" id="6_agqu2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2nyf"]
+radius = 170.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_11wcy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mq0hg")
+}],
+"loop": true,
+"name": &"Good",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dp61i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6mhl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_45ixv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_agqu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_45ixv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6mhl0")
+}],
+"loop": true,
+"name": &"Stressed",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o363v"]
+size = Vector2(215.5, 221.875)
+
+[node name="Souls 2" type="RigidBody2D"]
+disable_mode = 1
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_1f58x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_k2nyf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_11wcy")
+animation = &"Good"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.0625)
+shape = SubResource("RectangleShape2D_o363v")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Streedout" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="timeout" from="Streedout" to="." method="_on_streedout_timeout"]
